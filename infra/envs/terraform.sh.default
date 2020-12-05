@@ -1,0 +1,19 @@
+ENVIRONMENT="${1}"
+WEB_CIDR="${2}"
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_DEFAULT_REGION=""
+
+if [ "${ENVIRONMENT}" == "prod" ]; then
+  WEB_CIDR="0.0.0.0/0"
+fi
+
+# Remove any local state
+rm -rf .terraform
+rm *.tfstate
+
+terraform init -var-file="${ENVIRONMENT}.tfvars" -var "web-cidr=${WEB_CIDR}" -var "ssh-cidr=${SSH_CIDR}"
+
+terraform plan -var-file="${ENVIRONMENT}.tfvars" -var "web-cidr=${WEB_CIDR}"
+
+terraform apply -var-file="${ENVIRONMENT}.tfvars" -var "web-cidr=${WEB_CIDR}"
