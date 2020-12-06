@@ -8,10 +8,6 @@ if [ "${ENVIRONMENT}" == "prod" ]; then
   WEB_CIDR="0.0.0.0/0"
 fi
 
-# Remove any local state
-rm -rf .terraform
-rm *.tfstate
-
 terraform init -var-file="${ENVIRONMENT}.tfvars" -var "web-cidr=${WEB_CIDR}" -var "ssh-cidr=${SSH_CIDR}"
 
 terraform plan -var-file="${ENVIRONMENT}.tfvars" -var "web-cidr=${WEB_CIDR}"

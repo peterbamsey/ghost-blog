@@ -1,0 +1,21 @@
+ [
+        {
+            "name": "${app-name}",
+            "image": "${image-url}",
+            "portMappings": [
+                {
+                    "containerPort": ${container-port},
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                  "awslogs-group": "${cloudwatch-log-group-name}",
+                  "awslogs-region": "${region}",
+                  "awslogs-stream-prefix": "application"
+                }
+            }
+        }
+]

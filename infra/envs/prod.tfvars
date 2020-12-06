@@ -1,4 +1,4 @@
-region = "eu-west-1"
+region      = "eu-west-1"
 domain-name = "bamsey.net"
-sub-domain = ""
+sub-domain  = "blog"
 environment = "prod"

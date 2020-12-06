@@ -89,7 +89,7 @@ resource "aws_route" "public-default" {
 resource "aws_route" "private-default" {
   count                  = length(aws_route_table.private[*])
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = element(aws_nat_gateway.nat.*.id, count.index)
+  nat_gateway_id         = element(aws_nat_gateway.nat.*.id, count.index)
   route_table_id         = aws_route_table.private[count.index].id
 }
 

@@ -1,6 +1,6 @@
 infra/envs/terraform.sh
 .idea
 .idea/*
-infra/envs/terraform.tfstate
+infra/envs/terraform.tfstate*
 infra/envs/.terraform
 infra/envs/.terraform/*
