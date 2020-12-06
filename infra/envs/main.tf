@@ -2,17 +2,11 @@ locals {
   tags = {
     "env" = var.environment
   }
-  environment-variables = {
-    logging = {
-      path  = "blog/"
-      level = "info"
-      rotation = {
-        enabled : true
-        count : 15
-        period : "1d"
-      }
-      transports = ["stdout"]
-    }
+
+  environment-variables = local.url
+  url = {
+    name = "url"
+    value = "https://${var.sub-domain}.${var.domain-name}"
   }
 }
 
@@ -43,7 +37,7 @@ module "ecs" {
   ecs-cluster-name          = "ghost"
   ecs-service-name          = "ghost"
   environment               = var.environment
-  environment-variables     = null
+  environment-variables     = local.environment-variables
   image-url                 = "ghost"
   lb-target-group-arn       = module.load-balancer.target-group-arn
   private-subnet-ids        = module.networking.private-subnet-ids

@@ -111,9 +111,8 @@ data "template_file" "td" {
   vars = {
     app-name                  = var.app-name
     cloudwatch-log-group-name = aws_cloudwatch_log_group.log_group.name
-    #command                   = var.command
     container-port        = var.container-port
-    environment-variables = jsonencode("{}")
+    environment-variables = jsonencode(var.environment-variables)
     image-url             = var.image-url
     region                = var.region
     secrets               = jsonencode("{}")
