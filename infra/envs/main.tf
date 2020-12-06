@@ -16,6 +16,7 @@ locals {
   }
 }
 
+# The the availability zones
 data "aws_availability_zones" "azs" {
   filter {
     name   = "opt-in-status"

@@ -1,0 +1,4 @@
+region      = ""
+domain-name = ""
+sub-domain  = "blog"
+environment = "prod"

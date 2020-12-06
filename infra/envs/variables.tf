@@ -13,11 +13,6 @@ variable "region" {
   type        = string
 }
 
-variable "web-cidr" {
-  description = "The IP CIDR block that is allowed to access web ports"
-  type        = string
-}
-
 variable "sub-domain" {
   description = "The subdomain of the DNS record"
   type        = string
