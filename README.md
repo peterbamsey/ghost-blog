@@ -15,7 +15,7 @@ of of the Ghost CMS
 
 For more information on the infrastructure configuration, see the diagram below.
 
-![Ghost Blog Project](../../diagram/ghost-blog.drawio.jpg "Ghost Blog Project")
+![Ghost Blog Project](https://github.com/peterbamsey/ghost-blog/blob/main/diagram/ghost-blog.drawio.jpg "Ghost Blog Project")
 
 ### How?
 The entire stack, including public DNS records can be deployed directly from your computer.
