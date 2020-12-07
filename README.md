@@ -55,4 +55,46 @@ file and re-run the script
 #terraform destroy -var-file="${ENVIRONMENT}.tfvars"
 ```
 
+#### Scaling the instances
+This project is configured to allow horizontal scaling of both the application and database tiers.
+To scale the application tier change the  default value of the `number-of-applicaiton-instances` variable.
+```hcl-terraform
+variable "number-of-application-instances" {
+  default = 1
+  description = "The number of ECS Fargate tasks to run concurrnetly. Used for horizontal scaling of the application tier"
+  type = number
+}
+```
+To scale the database tier change the default value of the ``
+```hcl-terraform
 
+variable "number-of-db-instances" {
+  default = 2
+  description = "The number of RDS read replica instances to run concurrently.  Use for horizontal sclaing of the db tier"
+  type = number
+}
+
+```
+
+To improve this configuration we would create an autosclaing configuration for both the ECS Fargate task and the RDS Aurora 
+service which automatically scales the instances based on a predefined metric.
+
+#### Monitoring
+This project creates a very basic example monitoring dashboard in AWS Cloudwatch.  It uses metric widgets to display 
+basic information about the application.  The Dashboard name is `prod-ghost`.
+
+We can improve this considerably by templating the metric widgets and dashbaords to make the module more reusable.
+
+#### Alerting
+This project creates a very basic alerting system by utilising Cloudwatch Alarms and an SNS topic.  When the ECS instances
+go above a certain CPU utilisation, an alarm triggers that pushes a message to the SNS topic and sends an SMS message to
+the number defined in:
+```hcl-terraform
+variable "sms-number" {
+  description = "The number to send alarms to"
+  type = string
+  default = "+44012345678910"
+}
+```
+
+This module is currently unfinished, though the foundations are present.

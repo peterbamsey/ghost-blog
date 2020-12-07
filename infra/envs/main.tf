@@ -61,6 +61,7 @@ module "ecs" {
   cloudwatch-log-group-name = "/aws/ecs/${var.environment}-ghost"
   container-name            = "ghost"
   container-port            = 2368
+  desired-count             = var.number-of-application-instances
   ecr-repo-name             = "ghost"
   ecs-cluster-name          = "ghost"
   ecs-service-name          = "ghost"
@@ -98,6 +99,7 @@ module "db" {
   database-name          = "ghost"
   master-username        = "master"
   master-password        = "rootroot!!!"
+  number-of-instances    = var.number-of-db-instances
   private-subnet-ids     = module.networking.private-subnet-ids
   tags                   = local.tags
   environment            = var.environment
@@ -109,4 +111,12 @@ module "monitoring" {
   source      = "../modules/monitoring"
   app-name    = local.app-name
   environment = var.environment
+}
+
+module "alerting" {
+  source = "../modules/alerting"
+
+  app-name    = local.app-name
+  environment = var.environment
+  sms-number  = var.sms-number
 }
