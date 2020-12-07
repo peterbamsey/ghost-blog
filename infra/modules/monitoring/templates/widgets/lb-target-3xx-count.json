@@ -1,0 +1,10 @@
+{
+    "metrics": [
+        [ "AWS/ApplicationELB", "HTTPCode_Target_3XX_Count", "LoadBalancer", "app/prod-ghost/f3a70882296d8b63" ]
+    ],
+    "view": "timeSeries",
+    "stacked": false,
+    "region": "eu-west-1",
+    "stat": "Average",
+    "period": 300
+}

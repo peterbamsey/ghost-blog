@@ -1,0 +1,57 @@
+{"widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "ghost", "ClusterName", "ghost" ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-1",
+                "stat": "Average",
+                "period": 300,
+                "title": "ECS CPU Utilisation"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 0,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "ghost", "ClusterName", "ghost" ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-1",
+                "stat": "Average",
+                "period": 300,
+                "title": "ECS Memory Utilisation"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 0,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "CPUUtilization", "DBClusterIdentifier", "ghost-cluster" ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-1",
+                "stat": "Average",
+                "period": 300,
+                "title": "RDS CPU Utilisation"
+            }
+        }
+    ]
+}

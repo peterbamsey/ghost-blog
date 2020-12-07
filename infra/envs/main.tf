@@ -2,6 +2,7 @@ locals {
   tags = {
     "env" = var.environment
   }
+  app-name = "ghost"
 
   # Database environment variables
   environment-variables = [
@@ -33,13 +34,8 @@ locals {
     {
       name  = "database__connection__database"
       value = "ghost"
-    } /*,
-  {
-    name  = "database__connection__ssl"
-    value = "Amazon RDS"
-  }*/
+    }
   ]
-
 }
 
 # The the availability zones
@@ -104,7 +100,13 @@ module "db" {
   master-password        = "rootroot!!!"
   private-subnet-ids     = module.networking.private-subnet-ids
   tags                   = local.tags
-  environment            = ""
+  environment            = var.environment
   fargate-security-group = module.ecs.security-group-id
   vpc-id                 = module.networking.vpc-id
+}
+
+module "monitoring" {
+  source      = "../modules/monitoring"
+  app-name    = local.app-name
+  environment = var.environment
 }
