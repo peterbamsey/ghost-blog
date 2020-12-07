@@ -3,11 +3,43 @@ locals {
     "env" = var.environment
   }
 
-  environment-variables = local.url
-  url = {
-    name = "url"
-    value = "https://${var.sub-domain}.${var.domain-name}"
-  }
+  # Database environment variables
+  environment-variables = [
+    {
+      name  = "url"
+      value = "https://${var.sub-domain}.${var.domain-name}"
+    },
+
+    {
+      name  = "database__client"
+      value = "mysql"
+    },
+    {
+      name  = "database__connection__host"
+      value = module.db.cluster-endpoint-rw
+    },
+    {
+      name  = "database__connection__port"
+      value = "3306"
+    },
+    {
+      name  = "database__connection__user"
+      value = module.db.master-user
+    },
+    {
+      name  = "database__connection__password"
+      value = module.db.master-password
+    },
+    {
+      name  = "database__connection__database"
+      value = "ghost"
+    } /*,
+  {
+    name  = "database__connection__ssl"
+    value = "Amazon RDS"
+  }*/
+  ]
+
 }
 
 # The the availability zones
@@ -60,4 +92,19 @@ module "load-balancer" {
   vpc-id      = module.networking.vpc-id
   domain-name = var.domain-name
   sub-domain  = var.sub-domain
+}
+
+# Create a RDS instance
+module "db" {
+  source                 = "../modules/db"
+  app-name               = "ghost"
+  availability-zones     = data.aws_availability_zones.azs.names
+  database-name          = "ghost"
+  master-username        = "master"
+  master-password        = "rootroot!!!"
+  private-subnet-ids     = module.networking.private-subnet-ids
+  tags                   = local.tags
+  environment            = ""
+  fargate-security-group = module.ecs.security-group-id
+  vpc-id                 = module.networking.vpc-id
 }

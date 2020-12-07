@@ -52,7 +52,7 @@ variable "environment" {
 
 variable "environment-variables" {
   description = "The environment variables to pass to the container"
-  type        = map(string)
+  type        = list(map(string))
 }
 
 variable "grace-period" {

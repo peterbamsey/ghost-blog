@@ -9,7 +9,7 @@
                 }
             ],
             "essential": true,
-            "environment": [${environment-variables}],
+            "environment": ${environment-variables},
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {

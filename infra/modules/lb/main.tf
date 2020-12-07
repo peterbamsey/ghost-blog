@@ -43,6 +43,7 @@ resource "aws_lb_target_group" "tg" {
   health_check {
     interval = 30
     path     = "/"
+    matcher = "200,301"
   }
   port        = var.target-port
   protocol    = var.protocol
